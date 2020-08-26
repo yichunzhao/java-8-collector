@@ -1,5 +1,6 @@
 package com.ynz.java8collector;
 
+import com.ynz.java8collector.domain.Band;
 import com.ynz.java8collector.domain.Company;
 import com.ynz.java8collector.domain.Employee;
 import lombok.RequiredArgsConstructor;
@@ -48,15 +49,28 @@ public class Java8CollectorApplication implements CommandLineRunner {
         common.ifPresent(entry -> log.info(common.toString()));
 
         //find the Find the highest salaried employee of the company.
+        Optional<Employee> employeeHighSalary = company.getAllEmployees()
+                .stream()
+                .sorted((e1, e2) -> e2.getSalary().compareTo(e1.getSalary()))
+                .findFirst();
+
+        employeeHighSalary.ifPresent(
+                employee -> log.info("Employee with the highest salary: " + employeeHighSalary.get().toString()));
+
+        //Find the sum of salaries for all men.
+
+        Double totalSalary = company.getAllEmployees().stream().mapToDouble(employee -> employee.getSalary().doubleValue()).sum();
+        log.info("total salary: " + totalSalary);
 
 
-		//Find the sum of salaries for all men.
+        //Find the most popular grade/band in the company.
 
+        Optional<Map.Entry<Band, List<Employee>>> mostPopularBand = company.getAllEmployees().stream()
+                .collect(Collectors.groupingBy(employee -> employee.getBand()))
+                .entrySet().stream().sorted((b1, b2) -> Integer.compare(b2.getValue().size(), b1.getValue().size()))
+                .findFirst();
 
-		//Find the most popular grade/band in the company.
-
-
-
+        mostPopularBand.ifPresent(bandListEntry -> log.info("The Most popular band: " + mostPopularBand.get().toString()));
 
     }
 }
