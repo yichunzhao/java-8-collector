@@ -16,10 +16,8 @@ import java.util.stream.Collectors;
 @Component
 @ToString
 public class Company {
-
     //a company consists of departments and employees
     private Map<Department, Set<Employee>> departmentEmployees = new HashMap<>();
-
 
     public void addDepartment(Department department) {
         departmentEmployees.put(department, new HashSet<>());
@@ -29,13 +27,10 @@ public class Company {
         return departmentEmployees.keySet();
     }
 
-
     public List<Employee> getAllEmployees() {
         return departmentEmployees.values().stream()
                 .flatMap(employees -> employees.stream()).collect(Collectors.toList());
     }
-
-
 
     public void addNewEmployee(Employee employee, Department department) {
         if (departmentEmployees.containsKey(department)) {
@@ -93,8 +88,6 @@ public class Company {
 
         this.addNewEmployee(Employee.builder().band(Band.B3).gender(Gender.MALE).name("Sajjn")
                 .salary(BigDecimal.valueOf(2000)).build(), sales);
-
-
     }
 
 
