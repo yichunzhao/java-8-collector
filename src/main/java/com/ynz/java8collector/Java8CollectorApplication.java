@@ -73,6 +73,11 @@ public class Java8CollectorApplication implements CommandLineRunner {
                 .mapToDouble(employee -> employee.getSalary().doubleValue()).sum();
         log.info("total salary: " + totalSalary);
 
+        //using Collector.summingDouble to do the same
+        Double sumSalary = company.getAllEmployees().stream()
+                .collect(Collectors.summingDouble(employee -> employee.getSalary().doubleValue()));
+        log.info("total salary: " + sumSalary);
+
 
         //Find the most popular grade/band in the company.
         Optional<Map.Entry<Band, List<Employee>>> mostPopularBand = company.getAllEmployees().stream()
