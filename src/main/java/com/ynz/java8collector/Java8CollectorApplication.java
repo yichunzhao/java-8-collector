@@ -82,11 +82,27 @@ public class Java8CollectorApplication implements CommandLineRunner {
         //Find the most popular grade/band in the company.
         Optional<Map.Entry<Band, List<Employee>>> mostPopularBand = company.getAllEmployees().stream()
                 .collect(Collectors.groupingBy(employee -> employee.getBand()))
-                .entrySet().stream().sorted((b1, b2) -> Integer.compare(b2.getValue().size(), b1.getValue().size()))
+                .entrySet()
+                .stream()
+                .sorted((b1, b2) -> Integer.compare(b2.getValue().size(), b1.getValue().size()))
                 .findFirst();
 
         mostPopularBand.ifPresent(bandListEntry -> log.info("The Most popular band: " + mostPopularBand.get().toString()));
 
+        Optional<Map.Entry<Band, List<Employee>>> mostPopulatedBand = company.getAllEmployees().stream()
+                .collect(Collectors.groupingBy(employee -> employee.getBand()))
+                .entrySet()
+                .stream()
+                .collect(Collectors.maxBy((b1, b2) -> Integer.compare(b1.getValue().size(), b2.getValue().size()) ));
+        mostPopularBand.ifPresent(bandListEntry -> log.info("The Most popular band: " + mostPopulatedBand.get().toString()));
+
+        Optional<Map.Entry<Band, List<Employee>>> bandMostPopulated = company.getAllEmployees().stream()
+                .collect(Collectors.groupingBy(employee -> employee.getBand()))
+                .entrySet()
+                .stream()
+                .collect(Collectors.maxBy(Comparator.comparingInt(bandListEntry -> bandListEntry.getValue().size())));
+
+        mostPopularBand.ifPresent(bandListEntry -> log.info("The Most popular band: " + bandMostPopulated.get().toString()));
 
     }
 }
