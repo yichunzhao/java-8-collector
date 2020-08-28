@@ -90,5 +90,4 @@ public class Company {
                 .salary(BigDecimal.valueOf(2000)).build(), sales);
     }
 
-
 }
