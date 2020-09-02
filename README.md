@@ -7,9 +7,9 @@ Java 8 Collector
 
 *Collectors.toMap(keyMapper,valueMapper,mergeFunction)*
 
-accumulating a line of elements into a Map
+accumulating a line of elements<T> into a Map
 
-KeyMapper: T=Function(R), valueMapper: T=function(R), mergerFunction: o1 or o2 = mergeFunction(o1,o2) applied when a key confliction.
+KeyMapper: R=Function(T), valueMapper: R=function(T), mergerFunction: o1 or o2 = mergeFunction(o1,o2) applied when two keys conflict each other
 
 *Collectors.toMap(keyMapper,valueMapper,mergeFunction, supplier)*
 
