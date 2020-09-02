@@ -5,9 +5,15 @@ Java 8 Collector
 
 *Collectors.toList()*
 
-*Collectors.toMap()*
+*Collectors.toMap(keyMapper,valueMapper,mergeFunction)*
 
-Key generator, Value generator, function() solving key confliction.
+accumulating a line of elements into a Map
+
+KeyMapper: T=Function(R), valueMapper: T=function(R), mergerFunction: o1 or o2 = mergeFunction(o1,o2) applied when a key confliction.
+
+*Collectors.toMap(keyMapper,valueMapper,mergeFunction, supplier)*
+
+acculating a line of elements into a specific Map, which is supplied by the supplier function. 
 
 *Collecotrs.mayBy(Comparator) or minBy(Comparator)*
 
@@ -28,6 +34,15 @@ collecting a pipe of elements into a specific collection impl.
 *Collecotrs.summarizingInt/Double/Long(ToInt/Double/LongFunction())*
 
 collecting and reducting a pipe line of elements
+
+*Collectors.joining()*
+
+*Collectors.joining(CharSequence)*
+
+Both linking all elements in the pipline and return a String 
+
+
+
 
 
 
