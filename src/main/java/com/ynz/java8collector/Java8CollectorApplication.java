@@ -33,16 +33,23 @@ public class Java8CollectorApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        //log.info(company.toString());
         log.info("total number employees: " + String.valueOf(company.getAllEmployees().size()));
 
         log.info("+++++ find out the most common employee name in the company. +++++");
+        company.getAllEmployees()
+                .stream()
+                .collect(Collectors.groupingBy(Employee::getName, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max((e1, e2) -> e1.getValue().compareTo(e1.getValue()))
+                .ifPresent(entry -> log.info("the most common name in the company is " + entry.getKey() + " having " + entry.getValue()));
 
+        log.info("+++++ find the highest salaried employee of the company. +++++");
         //find max/min element in a Stream using max(Comparator)/min(Comparator)
         company.getAllEmployees()
                 .stream()
                 .max((e1, e2) -> e1.getSalary().compareTo(e2.getSalary()))
-                .ifPresent(employee -> log.info("most salaried employee: " + employee));
+                .ifPresent(employee -> log.info("the most salaried employee is " + employee));
 
         log.info("+++++ Find the sum of salaries for all men. +++++");
         double totalSalary = company.getAllEmployees()
@@ -51,10 +58,9 @@ public class Java8CollectorApplication implements CommandLineRunner {
                 .sum();
         log.info("total salary: " + totalSalary);
 
-
         log.info("+++++ Find the most popular grade/band in the company. +++++");
 
-        //find a max/min in a Map
+        //find a max
         //Collectors.groupingBy(r=f(t),Collectors) directly counting the number in the list
         company.getAllEmployees()
                 .stream()
