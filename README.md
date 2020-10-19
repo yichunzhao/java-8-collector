@@ -20,6 +20,7 @@ KeyMapper: R=Function(T), valueMapper: R=function(T), mergerFunction: o1 or o2 =
 acculating a line of elements into a specific Map, which is supplied by the supplier function. 
 
 *<T> Collector<T,?,Optional<T>> maxBy(Comparator<? super T> comparator)*
+
 *<T> Collector<T,?,Optional<T>> minBy(Comparator<? super T> comparator)*
 
 Collecting elements in a pipeline, and using an external comparator to find out the max. or min. element.
