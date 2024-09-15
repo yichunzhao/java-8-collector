@@ -48,7 +48,7 @@ public class Java8CollectorApplication implements CommandLineRunner {
         //find max/min element in a Stream using max(Comparator)/min(Comparator)
         company.getAllEmployees()
                 .stream()
-                .max((e1, e2) -> e1.getSalary().compareTo(e2.getSalary()))
+                .max(Comparator.comparing(Employee::getSalary))
                 .ifPresent(employee -> log.info("the most salaried employee is " + employee));
 
         log.info("+++++ Find the sum of salaries for all men. +++++");
