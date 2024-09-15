@@ -31,9 +31,9 @@ public class Java8CollectorApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
-        log.info("total number employees: " + String.valueOf(company.getAllEmployees().size()));
+        log.info("total number employees: " + company.getAllEmployees().size());
 
         log.info("+++++ find out the most common employee name in the company. +++++");
         company.getAllEmployees()

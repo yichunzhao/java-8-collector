@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @ToString
 public class Company {
     //a company consists of departments and employees
-    private Map<Department, Set<Employee>> departmentEmployees = new HashMap<>();
+    private final Map<Department, Set<Employee>> departmentEmployees = new HashMap<>();
 
     public void addDepartment(Department department) {
         departmentEmployees.put(department, new HashSet<>());
